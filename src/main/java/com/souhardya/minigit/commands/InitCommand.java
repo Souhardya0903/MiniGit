@@ -23,7 +23,7 @@ public class InitCommand {
         if (result.status() == InitializationStatus.CREATED) {
             System.out.println(
                     "Initialized empty MiniGit repository in "
-                            + result.repository().getRoot().toAbsolutePath()
+                            + result.repository().getRoot().toAbsolutePath().normalize()
             );
         } else {
             System.out.println(
