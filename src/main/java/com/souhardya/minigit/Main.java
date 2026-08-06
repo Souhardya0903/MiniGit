@@ -1,6 +1,7 @@
 package com.souhardya.minigit;
 
 import com.souhardya.minigit.cli.CommandParser;
+import com.souhardya.minigit.commands.HashObjectCommand;
 import com.souhardya.minigit.commands.InitCommand;
 import com.souhardya.minigit.hashing.Hasher;
 import com.souhardya.minigit.hashing.SHA1Hasher;
@@ -15,12 +16,7 @@ public class Main {
         Blob blob=new Blob("Hello World".getBytes(),"SHA1");
         BlobFormatter formatter=new BlobFormatter();
         Hasher hasher = new SHA1Hasher();
-        byte[] formattedBlob= formatter.format(blob);
-        String hash= hasher.hash(formattedBlob);
-
-        System.out.println(hash);
-
-        //temporary
+        HashObjectCommand hashObjectCommand=new HashObjectCommand(formatter,hasher);
 
         RepositoryInitializer repositoryInitializer =
                 new RepositoryInitializer();
@@ -29,7 +25,7 @@ public class Main {
                 new InitCommand(repositoryInitializer);
 
         CommandParser commandParser =
-                new CommandParser(initCommand);
+                new CommandParser(initCommand,hashObjectCommand);
 
         commandParser.parse(args);
     }
