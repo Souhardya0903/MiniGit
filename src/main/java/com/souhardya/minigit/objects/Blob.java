@@ -4,12 +4,10 @@ public class Blob {
 
     private final byte[] content;
     private final long size;
-    private final String hash;
 
-    public Blob(byte[] content, String hash) {
+    public Blob(byte[] content) {
         this.content = content;
         this.size = content.length;
-        this.hash = hash;
     }
 
     public long getSize() {
